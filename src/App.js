@@ -54,6 +54,7 @@ function App() {
   const [consensusId, setConsensusId] = useState("");
   const [open, setOpen] = React.useState(false);
   const [openendpoints, setOpenendpoints] = React.useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleClose = () => setOpen(false);
   const handleCloseendpoints = () => setOpenendpoints(false);
@@ -116,7 +117,10 @@ const logout = () => {
   setContract(null);
 };
 
-
+const handleInputChange = (newValues) => {
+  setSubmitted(false);
+  setInputs(newValues);
+}
 
 
 const submitCons = async () => {
@@ -155,11 +159,15 @@ const submitCons = async () => {
     });
 
     swal_success("Transaction submitted!");
+    setSubmitted(true);
 
   } catch (error) {
     console.error("An error occurred while submitting the transaction:", error);
     swal_error("Transaction failed.");
   }
+
+  handleClose();
+
 };
 
   const handleOpen = async () => {
@@ -317,7 +325,7 @@ const submitCons = async () => {
                       variant="contained"
                       class="button-64 button-64-varwidth"
                       //onClick={() => sign()}
-                      
+
                       onClick={() => submitCons()}                      
                     >
                       <span>
@@ -352,7 +360,7 @@ const submitCons = async () => {
          
           <div class="input-wrapper">
           <input
-            onChange={(e) => setInputs({ groupnumber: e.target.value })}
+            onChange={(e) => handleInputChange({ groupnumber: e.target.value })}
             defaultValue={inputs.groupnumber ?? ""}
             label="Group number"
             placeholder="Group number"
@@ -362,7 +370,7 @@ const submitCons = async () => {
           </div>
           <div class="input-wrapper">
           <input
-            onChange={(e) => setInputs({ vote1: e.target.value })}
+            onChange={(e) => handleInputChange({ vote1: e.target.value })}
             defaultValue={inputs.vote1 ?? ""}
             label="Level 6"
             placeholder="Level 6"
@@ -371,7 +379,7 @@ const submitCons = async () => {
           </div>
           <div class="input-wrapper">
           <input
-            onChange={(e) => setInputs({ vote2: e.target.value })}
+            onChange={(e) => handleInputChange({ vote2: e.target.value })}
             defaultValue={inputs.vote2 ?? ""}
             label="Level 5"
             placeholder="Level 5"
@@ -380,7 +388,7 @@ const submitCons = async () => {
           </div>
           <div class="input-wrapper">
           <input
-            onChange={(e) => setInputs({ vote3: e.target.value })}
+            onChange={(e) => handleInputChange({ vote3: e.target.value })}
             defaultValue={inputs.vote3 ?? ""}
             label="Level 4"
             placeholder="Level 4"
@@ -389,7 +397,7 @@ const submitCons = async () => {
           </div>
           <div class="input-wrapper">
           <input
-            onChange={(e) => setInputs({ vote4: e.target.value })}
+            onChange={(e) => handleInputChange({ vote4: e.target.value })}
             defaultValue={inputs.vote4 ?? ""}
             label="Level 3"
             placeholder="Level 3"
@@ -398,7 +406,7 @@ const submitCons = async () => {
           </div>
           <div class="input-wrapper">
           <input
-            onChange={(e) => setInputs({ vote5: e.target.value })}
+            onChange={(e) => handleInputChange({ vote5: e.target.value })}
             defaultValue={inputs.vote5 ?? ""}
             label="Level 2"
             placeholder="Level 2"
@@ -407,7 +415,7 @@ const submitCons = async () => {
           </div>
           <div class="input-wrapper">
           <input
-            onChange={(e) => setInputs({ vote6: e.target.value })}
+            onChange={(e) => handleInputChange({ vote6: e.target.value })}
             defaultValue={inputs.vote6 ?? ""}
             label="Level 1"
             placeholder="Level 1"
@@ -416,6 +424,7 @@ const submitCons = async () => {
           </div>
           <button
             class="button-64"
+            disabled={submitted}
             onClick={handleOpen}
           >
             <span class="text">
