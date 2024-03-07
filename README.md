@@ -1,2 +1,2 @@
-# Optimism Fractal Frontend
-Frontend for [Optimism Fractal smart contract](https://github.com/Optimystics/op-fractal-sc).
+# Optimystics Fractal Frontend
+Frontend for [Optimystics Fractal smart contract](https://github.com/Optimystics/optimystics-fractal-sc).
